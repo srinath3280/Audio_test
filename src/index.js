@@ -4,10 +4,44 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import RegistrationForm from './features/auth/register';
+import LoginForm from './features/auth/login';
+import SpeechRecognitionBySentence from './features/voicerecord/speechrecognizedbysentence';
+import SpeechRecognitionByWord from './features/voicerecord/speechrecognizedbyword';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <App></App>,
+    children: [
+      {
+        path: '/register',
+        element: <RegistrationForm></RegistrationForm>
+      },
+      {
+        path:'/login',
+        element:<LoginForm></LoginForm>
+      },
+      {
+        path:'/speechrecognization',
+        element:<SpeechRecognitionBySentence></SpeechRecognitionBySentence>
+      },
+      {
+        path:'/speechrecognizationbyword',
+        element:<SpeechRecognitionByWord></SpeechRecognitionByWord>
+      }
+    ]
+  },
+
+])
+
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 
